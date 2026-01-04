@@ -1,60 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fake News Detector | AI Powered</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>FakeCheck AI | Smart Detector</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="logo">FakeCheck<span>.AI</span></div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="https://github.com/nleelaranga-ai/fake-news-detector" target="_blank" class="btn-nav">GitHub Repo</a></li>
-    </ul>
-  </nav>
+  <div class="background-shapes"></div>
 
-  <section class="hero">
+  <div class="glass-container">
     
-    <div class="hero-text">
-      <span class="tagline">AI-POWERED VERIFICATION</span>
-      <h1>Verify News Authenticity Instantly.</h1>
-      <p>
-        Don't let misinformation spread. Our AI tool analyzes regional language content to detect fake news, emotional manipulation, and unverified sources in seconds.
-      </p>
+    <header>
+      <div class="logo">
+        <i class="fa-solid fa-shield-halved"></i> FakeCheck<span>.AI</span>
+      </div>
+      <p class="subtitle">Instantly verify regional news with Artificial Intelligence.</p>
+    </header>
+
+    <div class="input-section">
+      <div class="textarea-wrapper">
+        <i class="fa-solid fa-quote-left icon-quote"></i>
+        <textarea id="text" placeholder="Paste the suspicious message or news here..."></textarea>
+      </div>
       
-      <div class="tech-stack">
-        <p>Powered by:</p>
-        <div class="badges">
-          <span class="badge">Google Vertex AI</span>
-          <span class="badge">Cloud Translation API</span>
-        </div>
+      <button onclick="check()" class="btn-primary">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Credibility
+      </button>
+    </div>
+
+    <div id="result" class="result-box">
+      <div class="result-icon"><i class="fa-solid fa-circle-question"></i></div>
+      <div class="result-content">
+        <h3 id="res-status">Result Status</h3>
+        <p id="res-reason">Analysis reason will appear here.</p>
       </div>
     </div>
 
-    <div class="hero-tool">
-      <div class="box">
-        <h3>Analyze Content</h3>
-        <textarea id="text" placeholder="Paste your news or WhatsApp forward here..."></textarea>
-        
-        <button onclick="check()">Check Credibility</button>
-        
-        <div id="result" class="result">
-          </div>
-
-        <p class="disclaimer">⚠️ Results are for awareness only.</p>
+    <footer>
+      <div class="badges">
+        <span class="badge"><i class="fa-brands fa-google"></i> Vertex AI</span>
+        <span class="badge"><i class="fa-solid fa-language"></i> Translation API</span>
       </div>
-    </div>
+      <p class="disclaimer">⚠️ AI results are for awareness only.</p>
+    </footer>
 
-  </section>
+  </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
