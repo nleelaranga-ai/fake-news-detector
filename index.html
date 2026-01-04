@@ -2,46 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Fake News Detection for Regional Languages</title>
-
-  <!-- CSS LINK -->
-  <link rel="stylesheet" href="style.css">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake News Detector | AI Powered</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="box">
-    <h2>Fake News Detector</h2>
-    <p class="subtitle">
-      Verify regional language news using AI before sharing
-    </p>
+  <nav class="navbar">
+    <div class="logo">FakeCheck<span>.AI</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/nleelaranga-ai/fake-news-detector" target="_blank" class="btn-nav">GitHub Repo</a></li>
+    </ul>
+  </nav>
 
-    <textarea id="text" placeholder="Paste news or message here..."></textarea>
+  <section class="hero">
+    
+    <div class="hero-text">
+      <span class="tagline">AI-POWERED VERIFICATION</span>
+      <h1>Verify News Authenticity Instantly.</h1>
+      <p>
+        Don't let misinformation spread. Our AI tool analyzes regional language content to detect fake news, emotional manipulation, and unverified sources in seconds.
+      </p>
+      
+      <div class="tech-stack">
+        <p>Powered by:</p>
+        <div class="badges">
+          <span class="badge">Google Vertex AI</span>
+          <span class="badge">Cloud Translation API</span>
+        </div>
+      </div>
+    </div>
 
-    <button onclick="check()">Check Credibility</button>
+    <div class="hero-tool">
+      <div class="box">
+        <h3>Analyze Content</h3>
+        <textarea id="text" placeholder="Paste your news or WhatsApp forward here..."></textarea>
+        
+        <button onclick="check()">Check Credibility</button>
+        
+        <div id="result" class="result">
+          </div>
 
-    <div id="result" class="result"></div>
+        <p class="disclaimer">⚠️ Results are for awareness only.</p>
+      </div>
+    </div>
 
-    <hr>
+  </section>
 
-    <p class="powered">
-      Powered by <strong>Google Vertex AI</strong> & 
-      <strong>Google Cloud Translation API</strong> (Prototype)
-    </p>
-
-    <p class="disclaimer">
-      ⚠️ Note: Results are indicative and for awareness only.
-    </p>
-
-    <p class="links">
-      🔗 <a href="https://github.com/nleelaranga-ai/fake-news-detector" target="_blank">
-        GitHub Repository
-      </a>
-    </p>
-  </div>
-
-  <!-- JAVASCRIPT LINK -->
   <script src="script.js"></script>
 
 </body>
