@@ -1,40 +1,49 @@
 function check() {
   const textInput = document.getElementById("text").value.toLowerCase();
-  const result = document.getElementById("result");
+  const resultBox = document.getElementById("result");
+  const statusEl = document.getElementById("res-status");
+  const reasonEl = document.getElementById("res-reason");
+  const iconDiv = document.querySelector(".result-icon");
 
-  // Reset display
-  result.style.display = "none";
-  result.className = "result"; 
+  // Reset logic
+  resultBox.style.display = "none";
+  resultBox.className = "result-box"; // Clear old status classes
 
   if (!textInput.trim()) {
-    alert("Please paste some news text first.");
+    alert("Please paste some text to analyze.");
     return;
   }
 
-  // Define Keywords for Logic
-  const fakeKeywords = ["forward", "whatsapp", "share now", "urgent", "guaranteed", "winner", "magic", "cure", "viral", "prize"];
-  const suspiciousKeywords = ["shocking", "unbelievable", "secret", "government", "banned", "alert", "click here", "warning"];
+  // Keywords
+  const fakeKeywords = ["forward", "whatsapp", "urgent", "share now", "guaranteed", "winner", "viral", "magic cure"];
+  const suspiciousKeywords = ["shocking", "unbelievable", "secret", "banned", "alert", "click here"];
 
   let status = "Likely True";
-  let reason = "The language appears neutral and factual. No manipulative patterns detected.";
-  let cssClass = "true";
+  let reason = "Content appears neutral and factual. No manipulative patterns detected.";
+  let cssClass = "status-true";
+  let iconHtml = '<i class="fa-solid fa-check-circle"></i>';
 
-  // Check Patterns
+  // Analysis
   const foundFake = fakeKeywords.find(word => textInput.includes(word));
   const foundSuspicious = suspiciousKeywords.find(word => textInput.includes(word));
 
   if (foundFake) {
     status = "Likely Fake";
-    reason = `Contains emotionally manipulative words or spam patterns (e.g., '${foundFake}').`;
-    cssClass = "fake";
+    reason = `Contains high-risk spam patterns or manipulation (e.g., '${foundFake}').`;
+    cssClass = "status-fake";
+    iconHtml = '<i class="fa-solid fa-triangle-exclamation"></i>';
   } else if (foundSuspicious) {
     status = "Suspicious";
-    reason = `Sensational or unverified language detected (e.g., '${foundSuspicious}').`;
-    cssClass = "suspicious";
+    reason = `Uses sensational or unverified language (e.g., '${foundSuspicious}').`;
+    cssClass = "status-suspicious";
+    iconHtml = '<i class="fa-solid fa-circle-exclamation"></i>';
   }
 
-  // Display Result
-  result.innerHTML = `<strong>${status}</strong><br><span>${reason}</span>`;
-  result.classList.add(cssClass);
-  result.style.display = "block";
+  // Update UI
+  statusEl.innerText = status;
+  reasonEl.innerText = reason;
+  iconDiv.innerHTML = iconHtml;
+  
+  resultBox.classList.add(cssClass);
+  resultBox.style.display = "flex"; // Show the box
 }
