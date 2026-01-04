@@ -3,47 +3,34 @@ function check() {
   const resultBox = document.getElementById("result");
   const statusEl = document.getElementById("res-status");
   const reasonEl = document.getElementById("res-reason");
-  const iconDiv = document.querySelector(".result-icon");
 
-  // Reset logic
   resultBox.style.display = "none";
-  resultBox.className = "result-box"; // Clear old status classes
+  resultBox.className = "result-box"; 
 
   if (!textInput.trim()) {
-    alert("Please paste some text to analyze.");
+    alert("Please enter text.");
     return;
   }
 
-  // Keywords
-  const fakeKeywords = ["forward", "whatsapp", "urgent", "share now", "guaranteed", "winner", "viral", "magic cure"];
-  const suspiciousKeywords = ["shocking", "unbelievable", "secret", "banned", "alert", "click here"];
+  const fakeKeywords = ["forward", "whatsapp", "urgent", "share now", "guaranteed", "winner"];
+  const suspiciousKeywords = ["shocking", "unbelievable", "secret", "banned", "alert"];
 
   let status = "Likely True";
-  let reason = "Content appears neutral and factual. No manipulative patterns detected.";
+  let reason = "Neutral language detected.";
   let cssClass = "status-true";
-  let iconHtml = '<i class="fa-solid fa-check-circle"></i>';
 
-  // Analysis
-  const foundFake = fakeKeywords.find(word => textInput.includes(word));
-  const foundSuspicious = suspiciousKeywords.find(word => textInput.includes(word));
-
-  if (foundFake) {
+  if (fakeKeywords.some(word => textInput.includes(word))) {
     status = "Likely Fake";
-    reason = `Contains high-risk spam patterns or manipulation (e.g., '${foundFake}').`;
+    reason = "Contains spam patterns typical of misinformation.";
     cssClass = "status-fake";
-    iconHtml = '<i class="fa-solid fa-triangle-exclamation"></i>';
-  } else if (foundSuspicious) {
+  } else if (suspiciousKeywords.some(word => textInput.includes(word))) {
     status = "Suspicious";
-    reason = `Uses sensational or unverified language (e.g., '${foundSuspicious}').`;
+    reason = "Uses sensational language not common in verified news.";
     cssClass = "status-suspicious";
-    iconHtml = '<i class="fa-solid fa-circle-exclamation"></i>';
   }
 
-  // Update UI
   statusEl.innerText = status;
   reasonEl.innerText = reason;
-  iconDiv.innerHTML = iconHtml;
-  
   resultBox.classList.add(cssClass);
-  resultBox.style.display = "flex"; // Show the box
+  resultBox.style.display = "block";
 }
