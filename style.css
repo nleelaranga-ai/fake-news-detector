@@ -7,9 +7,9 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f8f9fc; /* Light clean background */
+  background-color: #f8f9fc;
   color: #333;
-  overflow-x: hidden;
+  /* REMOVED the old 'display: flex' that was breaking the layout */
 }
 
 /* NAVIGATION BAR */
@@ -74,7 +74,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 60px 5%;
-  min-height: 85vh;
+  min-height: 85vh; /* This ensures full screen height feel */
 }
 
 /* LEFT SIDE: Typography */
@@ -144,13 +144,15 @@ body {
   width: 100%;
   max-width: 450px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Soft shadow */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .box h3 {
   font-family: 'Playfair Display', serif;
   margin-bottom: 15px;
   font-size: 22px;
+  text-align: left; /* Resetting old center align */
+  color: #333;
 }
 
 textarea {
@@ -164,6 +166,7 @@ textarea {
   resize: none;
   background: #fafafa;
   transition: border 0.3s;
+  margin-top: 0; /* Reset old margins */
 }
 
 textarea:focus {
@@ -176,7 +179,7 @@ button {
   width: 100%;
   margin-top: 15px;
   padding: 14px;
-  background: #ff5e57; /* Coral from image */
+  background: #ff5e57;
   color: white;
   border: none;
   border-radius: 8px;
@@ -216,4 +219,5 @@ button:hover {
   .hero { flex-direction: column; text-align: center; padding-top: 30px; }
   .hero-text { padding-right: 0; margin-bottom: 40px; }
   .badges { justify-content: center; }
+  .navbar { flex-direction: column; gap: 10px; }
 }
