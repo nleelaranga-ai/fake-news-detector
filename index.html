@@ -3,54 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FakeCheck AI | Smart Detector</title>
+  <title>FakeCheck | AI Verification Platform</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="background-shapes"></div>
+  <header class="main-header">
+    <div class="logo">FakeCheck.</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">News</a></li>
+      </ul>
+    </nav>
+    <a href="https://github.com/nleelaranga-ai/fake-news-detector" target="_blank" class="btn-header">CONTACT NOW</a>
+  </header>
 
-  <div class="glass-container">
-    
-    <header>
-      <div class="logo">
-        <i class="fa-solid fa-shield-halved"></i> FakeCheck<span>.AI</span>
-      </div>
-      <p class="subtitle">Instantly verify regional news with Artificial Intelligence.</p>
-    </header>
-
-    <div class="input-section">
-      <div class="textarea-wrapper">
-        <i class="fa-solid fa-quote-left icon-quote"></i>
-        <textarea id="text" placeholder="Paste the suspicious message or news here..."></textarea>
-      </div>
+  <section class="hero">
+    <div class="container hero-layout">
       
-      <button onclick="check()" class="btn-primary">
-        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Credibility
-      </button>
-    </div>
-
-    <div id="result" class="result-box">
-      <div class="result-icon"><i class="fa-solid fa-circle-question"></i></div>
-      <div class="result-content">
-        <h3 id="res-status">Result Status</h3>
-        <p id="res-reason">Analysis reason will appear here.</p>
+      <div class="hero-text">
+        <span class="sub-title">WELCOME TO FAKECHECK</span>
+        <h1>WE HELP YOU TO<br>VERIFY NEWS INSTANTLY</h1>
+        <p>Stop misinformation in its tracks. Our AI-powered platform analyzes regional language content to detect fake news and emotional manipulation in seconds.</p>
+        <button class="btn-hero">READ MORE</button>
       </div>
-    </div>
 
-    <footer>
-      <div class="badges">
-        <span class="badge"><i class="fa-brands fa-google"></i> Vertex AI</span>
-        <span class="badge"><i class="fa-solid fa-language"></i> Translation API</span>
+      <div class="hero-tool">
+        <div class="tool-card">
+          <h3>Analyze Content</h3>
+          <textarea id="text" placeholder="Paste news or WhatsApp forward here..."></textarea>
+          <button onclick="check()" class="btn-check">CHECK CREDIBILITY</button>
+          
+          <div id="result" class="result-box">
+            <h4 id="res-status"></h4>
+            <p id="res-reason"></p>
+          </div>
+          
+          <p class="tool-note">Powered by Google Vertex AI</p>
+        </div>
       </div>
-      <p class="disclaimer">⚠️ AI results are for awareness only.</p>
-    </footer>
 
-  </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container feature-grid">
+      
+      <div class="feature-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/2620/2620559.png" alt="AI">
+        <h3>Smart Analysis</h3>
+        <p>Advanced NLP algorithms detect emotional manipulation and patterns typical of fake news.</p>
+      </div>
+
+      <div class="feature-item">
+        <img src="https://cdn-icons-png.flaticon.com/512/3898/3898150.png" alt="Language">
+        <h3>Regional Support</h3>
+        <p>Seamlessly translates and verifies content in Telugu, Hindi, Tamil, and other regional languages.</p>
+      </div>
+
+      <div class="feature-item highlight-box">
+        <h3>What we do<br>for you</h3>
+        <hr>
+        <p>We provide a secure, instant, and reliable verification layer for the information age.</p>
+        <a href="#" class="read-more-link">READ MORE →</a>
+      </div>
+
+    </div>
+  </section>
 
   <script src="script.js"></script>
 </body>
