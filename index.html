@@ -1,64 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Fake News Detector</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .box {
-      background: white;
-      padding: 20px;
-      width: 400px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px gray;
-    }
-    textarea {
-      width: 100%;
-      height: 100px;
-    }
-    button {
-      width: 100%;
-      margin-top: 10px;
-      padding: 10px;
-      background: blue;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .result {
-      margin-top: 15px;
-      padding: 10px;
-      display: none;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Fake News Detection for Regional Languages</title>
+
+  <!-- CSS LINK -->
+  <link rel="stylesheet" href="style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<div class="box">
-  <h3>Fake News Detector</h3>
-  <textarea id="text" placeholder="Paste news here..."></textarea>
-  <button onclick="check()">Check</button>
-  <div id="result" class="result"></div>
-</div>
+  <div class="box">
+    <h2>Fake News Detector</h2>
+    <p class="subtitle">
+      Verify regional language news using AI before sharing
+    </p>
 
-<script>
-  function check() {
-    let r = document.getElementById("result");
-    let options = [
-      "Likely Fake – emotionally misleading content",
-      "Suspicious – source not verified",
-      "Likely True – neutral language detected"
-    ];
-    r.innerText = options[Math.floor(Math.random() * options.length)];
-    r.style.display = "block";
-  }
-</script>
+    <textarea id="text" placeholder="Paste news or message here..."></textarea>
+
+    <button onclick="check()">Check Credibility</button>
+
+    <div id="result" class="result"></div>
+
+    <hr>
+
+    <p class="powered">
+      Powered by <strong>Google Vertex AI</strong> & 
+      <strong>Google Cloud Translation API</strong> (Prototype)
+    </p>
+
+    <p class="disclaimer">
+      ⚠️ Note: Results are indicative and for awareness only.
+    </p>
+
+    <p class="links">
+      🔗 <a href="https://github.com/nleelaranga-ai/fake-news-detector" target="_blank">
+        GitHub Repository
+      </a>
+    </p>
+  </div>
+
+  <!-- JAVASCRIPT LINK -->
+  <script src="script.js"></script>
 
 </body>
 </html>
