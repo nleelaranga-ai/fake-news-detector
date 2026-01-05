@@ -1,64 +1,53 @@
-import functions_framework
-from google.cloud import translate_v2 as translate
-from google.cloud import aiplatform
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+# Note: These imports are kept for your future Cloud deployment
+# from google.cloud import translate_v2 as translate
+# from google.cloud import aiplatform
 
-# --- CONFIGURATION ---
-PROJECT_ID = "your-google-cloud-project-id"  # You'd replace this in a real deploy
-LOCATION = "us-central1"
+app = Flask(__name__)
+CORS(app)  # Allows your index.html to communicate with this python script
 
-@functions_framework.http
-def check_fake_news(request):
-    # 1. Handle CORS (So your website can talk to this script)
-    if request.method == 'OPTIONS':
-        headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Max-Age': '3600'
-        }
-        return ('', 204, headers)
+@app.route('/check', methods=['POST'])
+def check_fake_news():
+    # 1. Get the input text
+    data = request.get_json()
+    text_input = data.get('text', '')
 
-    headers = {'Access-Control-Allow-Origin': '*'}
+    if not text_input:
+        return jsonify({"status": "Error", "reason": "No text provided"}), 400
 
-    # 2. Get the input text
-    request_json = request.get_json(silent=True)
-    if not request_json or 'text' not in request_json:
-        return ({"error": "No text provided"}, 400, headers)
+    # 2. Logic Layer (The "Brain")
+    # In the future, you will uncomment Google Cloud Translation & Vertex AI here.
     
-    text_input = request_json['text']
+    # --- PROTOTYPE LOGIC ---
+    fake_triggers = ["forward", "whatsapp", "viral", "guaranteed", "magic cure", "winner", "urgent"]
+    suspicious_triggers = ["shocking", "unbelievable", "secret", "banned", "alert"]
+    
+    input_lower = text_input.lower()
 
-    try:
-        # 3. Translate Regional Text -> English
-        # (This requires a Google Cloud Service Account in a real environment)
-        translate_client = translate.Client()
-        translation = translate_client.translate(text_input, target_language='en')
-        translated_text = translation['translatedText']
+    if any(word in input_lower for word in fake_triggers):
+        result = {
+            "status": "Likely Fake",
+            "reason": "Contains spam patterns typical of misinformation.",
+            "css_class": "status-fake"
+        }
+    elif any(word in input_lower for word in suspicious_triggers):
+        result = {
+            "status": "Suspicious",
+            "reason": "Uses sensational language not common in verified news.",
+            "css_class": "status-suspicious"
+        }
+    else:
+        result = {
+            "status": "Likely True",
+            "reason": "Language appears neutral and factual.",
+            "css_class": "status-true"
+        }
+    # -----------------------
 
-        # 4. Analyze Credibility (Vertex AI Logic)
-        # In this prototype code, we simulate the AI logic for demonstration
-        # In production, you would uncomment the Vertex AI Prediction lines below:
-        # endpoint = aiplatform.Endpoint(endpoint_name="projects/.../endpoints/...")
-        # prediction = endpoint.predict(instances=[{"content": translated_text}])
-        
-        # --- LOGIC FOR PROTOTYPE ---
-        fake_triggers = ["forward", "whatsapp", "viral", "guaranteed", "magic cure"]
-        
-        if any(word in translated_text.lower() for word in fake_triggers):
-            result = {
-                "status": "Likely Fake",
-                "reason": "Suspicious viral patterns detected in text.",
-                "type": "fake"
-            }
-        else:
-            result = {
-                "status": "Likely True",
-                "reason": "Language appears neutral and factual.",
-                "type": "true"
-            }
-        # ---------------------------
+    return jsonify(result)
 
-        return (result, 200, headers)
-
-    except Exception as e:
-        # Fallback if API fails (e.g., no credentials found locally)
-        return ({"error": str(e)}, 500, headers)
+if __name__ == '__main__':
+    # Runs the server on port 5000
+    print("Server is running on http://127.0.0.1:5000")
+    app.run(debug=True, port=5000)
