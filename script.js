@@ -1,45 +1,54 @@
-async function check() {
-  const textInput = document.getElementById("text").value;
+function check() {
+  // 1. Get the input text and UI elements
+  const textInput = document.getElementById("text").value.toLowerCase();
   const resultBox = document.getElementById("result");
   const statusEl = document.getElementById("res-status");
   const reasonEl = document.getElementById("res-reason");
 
-  // 1. Reset UI
+  // 2. Reset the Result Box (hide it and remove old colors)
   resultBox.style.display = "none";
   resultBox.className = "result-box"; 
 
+  // 3. Simple validation
   if (!textInput.trim()) {
-    alert("Please enter text.");
+    alert("Please enter text to analyze.");
     return;
   }
 
-  // 2. Show Loading State
-  statusEl.innerText = "Analyzing...";
-  reasonEl.innerText = "Connecting to AI server...";
-  resultBox.style.display = "block";
-  resultBox.classList.remove("status-true", "status-fake", "status-suspicious");
+  // 4. The "Brain" - Lists of words to trigger detection
+  // (Since we can't use Python on GitHub Pages, we define them here)
+  const fakeKeywords = [
+      "forward", "whatsapp", "urgent", "share now", 
+      "guaranteed", "winner", "magic cure", "viral", 
+      "lottery", "free money"
+  ];
+  const suspiciousKeywords = [
+      "shocking", "unbelievable", "secret", 
+      "banned", "alert", "exclusive"
+  ];
 
-  try {
-    // 3. Send data to Python Backend
-    const response = await fetch("http://127.0.0.1:5000/check", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ text: textInput })
-    });
+  // 5. Default Result (Assume True)
+  let status = "Likely True";
+  let reason = "Language appears neutral and factual.";
+  let cssClass = "status-true";
 
-    const data = await response.json();
-
-    // 4. Update UI with Backend Result
-    statusEl.innerText = data.status;
-    reasonEl.innerText = data.reason;
-    resultBox.classList.add(data.css_class);
-
-  } catch (error) {
-    console.error("Error:", error);
-    statusEl.innerText = "Connection Error";
-    reasonEl.innerText = "Could not reach the backend. Is 'main.py' running?";
-    resultBox.classList.add("status-fake");
+  // 6. Run the Logic
+  // Check for Fake words
+  if (fakeKeywords.some(word => textInput.includes(word))) {
+    status = "Likely Fake";
+    reason = "Contains spam patterns typical of misinformation (e.g., '" + fakeKeywords.find(word => textInput.includes(word)) + "').";
+    cssClass = "status-fake";
+  } 
+  // Check for Suspicious words
+  else if (suspiciousKeywords.some(word => textInput.includes(word))) {
+    status = "Suspicious";
+    reason = "Uses sensational language not common in verified news.";
+    cssClass = "status-suspicious";
   }
+
+  // 7. Display the Result
+  statusEl.innerText = status;
+  reasonEl.innerText = reason;
+  resultBox.classList.add(cssClass); // Adds green, red, or yellow color
+  resultBox.style.display = "block"; // Shows the box
 }
