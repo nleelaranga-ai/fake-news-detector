@@ -2,7 +2,8 @@
 // We use the key you provided to connect to Google Gemini
 const API_KEY = "AIzaSyDXSY05LaUJJx3ZFMyqiTfd1hELKPWx-7c"; 
 
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
+// Change 'gemini-pro' to 'gemini-1.5-flash'
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 async function check() {
   const textInput = document.getElementById("text").value;
